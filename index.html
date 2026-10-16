@@ -1,1 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PinkPromise 💗</title>
 
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: linear-gradient(135deg, #fff7fb, #ffd9e9);
+    color: #a64270;
+    text-align: center;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 22px 15px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.card {
+    width: 100%;
+    max-width: 420px;
+    padding: 25px 20px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 2px solid #ffc7dd;
+    border-radius: 28px;
+    box-shadow: 0 8px 25px rgba(190, 90, 130, 0.15);
+}
+
+.decor {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-size: 26px;
+    line-height: 1.4;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+button {
+    border: none;
+    border-radius: 30px;
+    background: #ed85b0;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px 20px;
+    margin: 8px 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(190, 90, 130, 0.15);
+}
+
+.button2 {
+    background: #cb6596;
+}
+
+.note {
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+#final {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fff7fb, #ffc9df);
+}
+
+.kiss {
+    position: absolute;
+    top: -60px;
+    animation: fall linear forwards;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(115vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST SCREEN -->
+<section class="screen active" id="welcome">
+    <div class="card">
+        <div class="decor">🧸 🐷 💗 🐷 🧸</div>
+
+        <h1>A little sorry letter for Dukluu 🥹💗</h1>
+
+        <p>
+            Hey, my favourite person! 🫶🏻<br>
+            I made something special just for you. 💌
+        </p>
+
+        <button onclick="openScreen('letter')">
+            Tap to open letter 🫶🏻
+        </button>
+
+        <div class="note">Made with lots of love 💗</div>
+    </div>
+</section>
+
+<!-- SECOND SCREEN -->
+<section class="screen" id="letter">
+    <div class="card">
+        <div class="decor">🐷 💌 🧸</div>
+
+        <h1>My sweetest Dukluu ❤️</h1>
+
+        <p>
+            My love,<br><br>
+
+            I'm sorry for the times I hurt you, overthink things,
+            or make little moments difficult between us. 🥹<br><br>
+
+            You mean so much to me, and I never want you to forget
+            how special you are in my life. 💗<br><br>
+
+            Thank you for being my comfort, my happiness,
+            and my favourite person. I know I'm not perfect,
+            but my love for you is real and precious to me. 🫶🏻<br><br>
+
+            I want us to laugh more, understand each other better,
+            and make beautiful memories together. 🌷<br><br>
+
+            I love you, my Dukluu. Always your girl. 💋
+        </p>
+
+        <button onclick="openScreen('date')">
+            Surprise for you! 💗
+        </button>
+    </div>
+</section>
+
+<!-- THIRD SCREEN -->
+<section class="screen" id="date">
+    <div class="card">
+        <div class="decor">🚗 🌷 💗 🌷 🚗</div>
+
+        <h1>One little question, Dukluu 🥹</h1>
+
+        <p>
+            Can we go on a date with a long drive? 🚗💗<br><br>
+
+            Just you and me, our favourite songs,
+            the road, and a little time together. 🫶🏻
+        </p>
+
+        <button onclick="openScreen('final')">
+            Yes 💗
+        </button>
+
+        <button class="button2" onclick="openScreen('final')">
+            Of course I will 🥹
+        </button>
+    </div>
+</section>
+
+<!-- FINAL SCREEN: KISSING EMOJI SHOWER -->
+<section class="screen" id="final">
+</section>
+
+<script>
+function openScreen(id) {
+    document.querySelectorAll(".screen").forEach(function(screen) {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+
+    if (id === "final") {
+        startKisses();
+    }
+}
+
+let kissInterval;
+
+function startKisses() {
+    const finalScreen = document.getElementById("final");
+
+    clearInterval(kissInterval);
+    finalScreen.innerHTML = "";
+
+    function createKiss() {
+        const kiss = document.createElement("span");
+
+        kiss.className = "kiss";
+        kiss.textContent = Math.random() > 0.5 ? "💋" : "😘";
+        kiss.style.left = Math.random() * 100 + "vw";
+        kiss.style.fontSize = (22 + Math.random() * 28) + "px";
+
+        const duration = 3 + Math.random() * 4;
+        kiss.style.animationDuration = duration + "s";
+
+        finalScreen.appendChild(kiss);
+
+        setTimeout(function() {
+            kiss.remove();
+        }, duration * 1000);
+    }
+
+    for (let i = 0; i < 25; i++) {
+        setTimeout(createKiss, i * 100);
+    }
+
+    kissInterval = setInterval(createKiss, 180);
+}
+</script>
+
+</body>
+</html>
